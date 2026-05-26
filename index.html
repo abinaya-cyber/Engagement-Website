@@ -521,6 +521,40 @@
       font-size:0.78rem; color:var(--gold); letter-spacing:0.1em;
     }
 
+    /* ── MAP EMBED ── */
+    .map-embed-wrap {
+      margin: 20px 0;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid rgba(212,175,55,0.35);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5),
+                  0 0 0 1px rgba(212,175,55,0.1),
+                  inset 0 0 30px rgba(212,175,55,0.04);
+      position: relative;
+    }
+    .map-embed-wrap::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, #D4AF37, #F5E27A, #D4AF37, transparent);
+      z-index: 2; pointer-events: none;
+    }
+    .map-embed-wrap iframe {
+      width: 100%; height: 260px;
+      border: none; display: block;
+      filter: saturate(1.1) contrast(1.05);
+    }
+    .map-embed-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem; letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(212,175,55,0.6);
+      margin-bottom: 10px;
+      display: block;
+    }
+    @media(max-width:480px){
+      .map-embed-wrap iframe { height: 200px; }
+    }
+
     /* S3 couple photo */
     .s3-photo {
       width:min(280px,80%); margin:20px auto;
@@ -1207,6 +1241,17 @@
       <h3>Rani Krishna Mahal</h3>
       <p>Nearby New Bus Stand<br/>Villupuram, Tamil Nadu</p>
       <span class="landmark-chip">&#128341; Backside of Sai Baba Temple</span>
+    </div>
+
+    <!-- Google Map Embed -->
+    <div class="map-embed-wrap reveal d4">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.5!2d79.4921!3d11.9401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a536e4f4f4f4f4f%3A0x1a2b3c4d5e6f7a8b!2sRani+Krishna+Mahal%2C+Villupuram%2C+Tamil+Nadu!5e0!3m2!1sen!2sin!4v1234567890"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Rani Krishna Mahal, Villupuram">
+      </iframe>
     </div>
 
     <!-- Couple photo -->
