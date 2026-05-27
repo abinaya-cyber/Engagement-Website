@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -215,33 +215,36 @@
       margin-top: 16px;
     }
     .scroll-hint {
-      position: absolute; bottom: 44px; left: 50%;
-      transform: translateX(-50%);
-      z-index: 10; display: flex; flex-direction: column;
-      align-items: center; gap: 10px;
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
       animation: fadeUp 1s ease 1.4s both;
     }
     .scroll-hint span {
       font-family: 'Cinzel', serif;
-      font-size: 0.72rem; letter-spacing: 0.28em;
+      font-size: 0.6rem; letter-spacing: 0.22em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.92);
       text-shadow: 0 0 12px rgba(212,175,55,0.9), 0 0 24px rgba(212,175,55,0.5);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
     }
     .scroll-arrow {
-      width: 22px; height: 22px;
+      width: 20px; height: 20px;
       border-right: 2.5px solid #F5E27A;
       border-bottom: 2.5px solid #F5E27A;
       transform: rotate(45deg);
       filter: drop-shadow(0 0 6px rgba(212,175,55,0.9));
       animation: bounce 1.4s ease-in-out infinite;
+      flex-shrink: 0;
     }
     @keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(8px)} }
-    @media(max-width:480px){
-      .scroll-hint { bottom: 52px; gap: 8px; }
-      .scroll-hint span { font-size: 0.65rem; letter-spacing: 0.22em; }
-      .scroll-arrow { width: 20px; height: 20px; }
-    }
 
     /* Floating lanterns on hero */
     .lantern {
