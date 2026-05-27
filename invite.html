@@ -1108,6 +1108,66 @@
       }
     }
 
+    /* ── MUSIC PLAYER ── */
+    #music-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 9999;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2d1000, #5c2a00);
+      border: 2px solid rgba(212,175,55,0.7);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 0 0 rgba(212,175,55,0.4);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, box-shadow 0.3s;
+      outline: none;
+    }
+    #music-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(0,0,0,0.6), 0 0 16px rgba(212,175,55,0.4); }
+    #music-btn.playing {
+      animation: musicPulse 2s ease-in-out infinite;
+      border-color: rgba(212,175,55,1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 0 4px rgba(212,175,55,0.25);
+    }
+    @keyframes musicPulse {
+      0%,100% { box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 0 4px rgba(212,175,55,0.25); }
+      50%      { box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 0 10px rgba(212,175,55,0.0); }
+    }
+    #music-btn svg { width: 22px; height: 22px; }
+    #music-btn .music-note {
+      font-size: 1.4rem;
+      filter: drop-shadow(0 0 4px rgba(212,175,55,0.8));
+      transition: opacity 0.2s;
+    }
+    #music-label {
+      position: fixed;
+      bottom: 30px;
+      left: 84px;
+      z-index: 9998;
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.85);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+      text-transform: uppercase;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.4s, transform 0.4s;
+      white-space: nowrap;
+    }
+    #music-label.visible { opacity: 1; transform: translateX(0); }
+    #yt-player-wrap {
+      position: fixed;
+      bottom: -5px; left: -5px;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
   </style>
 </head>
 <body class="page-bg">
@@ -1128,6 +1188,15 @@
 
 <!-- PETALS -->
 <canvas id="petals"></canvas>
+
+<!-- ── MUSIC PLAYER ── -->
+<button id="music-btn" title="Play Music" onclick="toggleMusic()">
+  <span class="music-note" id="music-icon">🎵</span>
+</button>
+<div id="music-label">Now Playing</div>
+<div id="yt-player-wrap">
+  <div id="yt-player"></div>
+</div>
 
 <!-- ============================================================
      SECTION 1 &mdash; TAJ MAHAL SUNSET HERO
@@ -1347,6 +1416,70 @@
 </section>
 
 <script>
+// ---- YOUTUBE MUSIC PLAYER ----
+var ytPlayer = null;
+var musicPlaying = false;
+var ytReady = false;
+
+// Load YouTube IFrame API
+(function(){
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+})();
+
+function onYouTubeIframeAPIReady() {
+  ytReady = true;
+  ytPlayer = new YT.Player('yt-player', {
+    height: '1',
+    width: '1',
+    videoId: 'd0xbQmy26rY',
+    playerVars: {
+      autoplay: 0,
+      controls: 0,
+      loop: 1,
+      playlist: 'd0xbQmy26rY',
+      playsinline: 1,
+      enablejsapi: 1
+    },
+    events: {
+      onReady: function(e) { ytReady = true; },
+      onStateChange: function(e) {
+        if (e.data === YT.PlayerState.ENDED) {
+          e.target.playVideo();
+        }
+      }
+    }
+  });
+}
+
+function toggleMusic() {
+  var btn = document.getElementById('music-btn');
+  var icon = document.getElementById('music-icon');
+  var label = document.getElementById('music-label');
+
+  if (!ytPlayer || typeof ytPlayer.playVideo !== 'function') {
+    // Player not ready yet — try to load it
+    alert('Music is loading, please try again in a moment!');
+    return;
+  }
+
+  if (!musicPlaying) {
+    ytPlayer.playVideo();
+    ytPlayer.setVolume(80);
+    musicPlaying = true;
+    icon.textContent = '🔊';
+    btn.classList.add('playing');
+    label.classList.add('visible');
+    setTimeout(function(){ label.classList.remove('visible'); }, 3000);
+  } else {
+    ytPlayer.pauseVideo();
+    musicPlaying = false;
+    icon.textContent = '🎵';
+    btn.classList.remove('playing');
+  }
+}
+
 // ---- PETALS ----
 (function(){
   const c=document.getElementById('petals'),ctx=c.getContext('2d');
