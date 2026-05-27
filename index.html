@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -707,7 +707,7 @@
     /* ── SCENE ── */
     .rb-scene{
       position:relative;
-      width:260px; height:320px;
+      width:260px; height:340px;
       margin:0 auto;
       perspective:900px;
       perspective-origin:50% 40%;
@@ -802,6 +802,7 @@
       align-items:center; justify-content:center; gap:4px;
       backface-visibility:hidden;
       opacity:0; transition:opacity 0.4s ease 0.8s;
+      pointer-events:none;
     }
     .wb-lid-inner.show{ opacity:1; }
     .wb-lid-inscription{
@@ -816,11 +817,11 @@
 
     /* ── BASE ── */
     .wb-base{
-      width:220px; height:100px;
+      width:220px; height:120px;
       position:relative; z-index:2;
     }
     .wb-base-front{
-      width:220px; height:100px;
+      width:220px; height:120px;
       background:
         linear-gradient(170deg,#8b4513 0%,#5c2000 40%,#3d1200 70%,#2a0d00 100%);
       border-radius:2px 2px 10px 10px;
@@ -844,16 +845,15 @@
     }
     /* Base velvet interior (inside the base) */
     .wb-velvet{
-      position:absolute; top:0; left:4px; right:4px; height:90px;
-      background:
-        radial-gradient(ellipse at 50% 60%, #2a2a2a 0%, #111 60%, #0a0a0a 100%);
+      position:absolute; top:0; left:4px; right:4px; height:112px;
+      background: linear-gradient(180deg, #f0e6d0 0%, #e8d5b5 50%, #d4c09a 100%);
       border-radius:2px 2px 6px 6px;
       overflow:hidden; display:flex;
       align-items:center; justify-content:center;
     }
     .wb-velvet::before{
       content:'';position:absolute;inset:0;
-      background:radial-gradient(ellipse at 50% 30%, rgba(212,175,55,0.08) 0%, transparent 60%);
+      background:radial-gradient(ellipse at 50% 20%, rgba(255,240,200,0.6) 0%, rgba(212,175,55,0.15) 50%, transparent 80%);
     }
     .real-rings-photo{
       width:90%; height:85%;
@@ -862,6 +862,7 @@
       opacity:0;
       transform:translateY(8px) scale(0.9);
       transition:opacity 0.6s ease 1.2s, transform 0.6s ease 1.2s;
+      position:relative; z-index:2;
     }
     .real-rings-photo.show{
       opacity:1; transform:translateY(0) scale(1);
