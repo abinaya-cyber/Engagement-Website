@@ -745,9 +745,9 @@
       z-index:3;
       transform: rotateX(0deg);
     }
-    /* Lid open state: flip back */
+    /* Lid open state: flip in place to reveal inside */
     .wb-lid.open{
-      transform:rotateX(-130deg);
+      transform: translateY(-100%) rotateX(180deg);
     }
 
     /* ── DOUBLE-SIDED 3D LID FACES ── */
@@ -791,7 +791,7 @@
       border-radius:8px 8px 2px 2px;
       display:flex; flex-direction:column;
       align-items:center; justify-content:center; gap:4px;
-      transform:rotateY(180deg) translateZ(1px); /* Face back and keep readable */
+      transform:rotateX(180deg) translateZ(1px); /* Face back and keep readable */
       box-shadow:inset 0 0 12px rgba(0,0,0,0.8);
       z-index:1;
       opacity:0;
