@@ -54,6 +54,12 @@
     #custom-cursor.clicking {
       transform: translate(-50%, -50%) scale(0.7);
     }
+    #custom-cursor.hovering {
+      transform: translate(-50%, -50%) scale(1.4);
+    }
+    #custom-cursor.clicking.hovering {
+      transform: translate(-50%, -50%) scale(1.0);
+    }
     .cur-trail {
       position: fixed;
       border-radius: 50%;
@@ -678,11 +684,6 @@
       .footer-names { font-size: 1.9rem; }
       .cd-item { min-width: 52px; padding: 10px 8px; }
       .cd-num { font-size: 1.6rem; }
-      .rb-scene { width: 210px; height: 240px; }
-      .rbc-top, .rb-lid-wrap { width: 178px; }
-      .rbc-lip { width: 186px; }
-      .rb-base-wrap, .rbc-base { width: 178px; }
-      .rbo-lid-back, .rbo-base { width: 188px; }
     }
 
     /* ═══════════════════════════════════════════════════
@@ -710,7 +711,7 @@
       position:relative;
       width:260px; height:340px;
       margin:0 auto;
-      perspective:1000px;
+      perspective:1200px;
       perspective-origin:50% 30%;
     }
 
@@ -721,11 +722,17 @@
       width:220px;
       transform-style:preserve-3d;
       animation:woodFloat 4s ease-in-out infinite;
-      transition:transform 0.8s ease;
+      transition:transform 1.0s cubic-bezier(0.4, 0, 0.2, 1);
     }
     @keyframes woodFloat{
       0%,100%{transform:translateX(-50%) rotateX(8deg) rotateY(-6deg) translateY(0)}
       50%{transform:translateX(-50%) rotateX(6deg) rotateY(6deg) translateY(-14px)}
+    }
+
+    /* When open: tilt box forward and lift slightly to look inside */
+    .wb-wrapper.open {
+      animation: none !important;
+      transform: translateX(-50%) rotateX(15deg) rotateY(0deg) translateY(-10px);
     }
 
     /* ── LID ── */
@@ -736,6 +743,7 @@
       transform-style:preserve-3d;
       transition:transform 1.2s cubic-bezier(0.4,0,0.2,1);
       z-index:3;
+      transform: rotateX(0deg);
     }
     /* Lid open state: flip back */
     .wb-lid.open{
@@ -747,6 +755,8 @@
       position:absolute; inset:0;
       border-radius:8px 8px 2px 2px;
       backface-visibility:hidden;
+      -webkit-backface-visibility:hidden;
+      transition:opacity 0.5s ease;
     }
 
     /* Front/Outside face */
@@ -760,7 +770,8 @@
         2px 0 6px rgba(0,0,0,0.5),
         -2px 0 6px rgba(0,0,0,0.5);
       z-index:2;
-      transform:rotateX(0deg);
+      transform:rotateX(0deg) translateZ(1px); /* Prevent Z-fighting */
+      opacity:1;
     }
     /* Wood grain on lid front */
     .wb-lid-front::before{
@@ -780,11 +791,10 @@
       border-radius:8px 8px 2px 2px;
       display:flex; flex-direction:column;
       align-items:center; justify-content:center; gap:4px;
-      transform:rotateX(180deg); /* Faces the inside when open */
-      opacity:0; transition:opacity 0.4s ease 0.8s;
-      pointer-events:none;
+      transform:rotateY(180deg) translateZ(1px); /* Face back and keep readable */
       box-shadow:inset 0 0 12px rgba(0,0,0,0.8);
       z-index:1;
+      opacity:0;
     }
     .wb-lid-back.show{ opacity:1; }
     .wb-lid-inscription{
@@ -795,6 +805,16 @@
     .wb-lid-heart{
       font-size:0.9rem; color:#e87c9a;
       animation:pulse 1.8s ease-in-out infinite;
+    }
+
+    /* Cross-fade faces when lid open state toggles */
+    .wb-lid.open .wb-lid-front {
+      opacity:0;
+      pointer-events:none;
+    }
+    .wb-lid.open .wb-lid-back {
+      opacity:1;
+      z-index:3;
     }
 
     /* Gold latch on lid front */
@@ -843,6 +863,7 @@
       overflow:hidden;
       box-shadow:inset 0 4px 10px rgba(0,0,0,0.3);
       z-index:1;
+      transform:translateZ(-1px);
     }
     .wb-velvet::before{
       content:'';position:absolute;inset:0;
@@ -863,6 +884,7 @@
         2px 0 0 rgba(212,175,55,0.5),
         -2px 0 0 rgba(212,175,55,0.5);
       z-index:2;
+      transform:translateZ(1px);
       transition:height 1.2s cubic-bezier(0.4, 0, 0.2, 1), border-radius 1.2s ease, box-shadow 1.2s ease;
       overflow:hidden;
     }
@@ -878,7 +900,7 @@
     }
 
     /* Open state: slide the wood front wall down to reveal velvet */
-    #wbLid.open ~ .wb-base .wb-base-front {
+    .wb-wrapper.open .wb-base-front {
       height:50px; /* Reveal top 70px of velvet */
       border-radius:0 0 10px 10px;
       box-shadow:
@@ -970,7 +992,7 @@
       .wb-lid, .wb-lid-front, .wb-lid-back{width:190px; height:78px;}
       .wb-base{width:190px; height:100px;}
       .wb-base-front{width:190px; height:100px;}
-      #wbLid.open ~ .wb-base .wb-base-front {
+      .wb-wrapper.open .wb-base-front {
         height:40px; /* Reveal top 60px of velvet */
       }
       .real-rings-photo{
@@ -988,7 +1010,7 @@
       .wb-lid, .wb-lid-front, .wb-lid-back{width:170px; height:70px;}
       .wb-base{width:170px; height:85px;}
       .wb-base-front{width:170px; height:85px;}
-      #wbLid.open ~ .wb-base .wb-base-front {
+      .wb-wrapper.open .wb-base-front {
         height:35px; /* Reveal top 50px of velvet */
       }
       .real-rings-photo{
@@ -1009,7 +1031,7 @@
       .wb-lid, .wb-lid-front, .wb-lid-back{width:155px; height:65px;}
       .wb-base{width:155px; height:75px;}
       .wb-base-front{width:155px; height:75px;}
-      #wbLid.open ~ .wb-base .wb-base-front {
+      .wb-wrapper.open .wb-base-front {
         height:30px; /* Reveal top 45px of velvet */
       }
       .real-rings-photo{
@@ -1123,7 +1145,7 @@
     <!-- WOODEN 3D RING BOX -->
     <div class="ring-box-section reveal" id="ringBoxSection">
       <div class="rb-ambient"></div>
-      <div class="rb-scene" id="rbScene">
+      <div class="rb-scene" id="rbScene" onclick="openRingBox()">
 
         <!-- WOODEN BOX WRAPPER -->
         <div class="wb-wrapper" id="wbWrapper">
@@ -1304,15 +1326,26 @@ function openRingBox(){
   if(isOpen){
     // CLOSE
     lid.classList.remove('open');
+    if(wrapper) {
+      wrapper.classList.remove('open');
+      // Delay floating animation reset until transition completes
+      setTimeout(function(){
+        if(wrapper && !wrapper.classList.contains('open')) {
+          wrapper.style.animation = 'woodFloat 4s ease-in-out infinite';
+        }
+      }, 1000);
+    }
     if(lidInner) lidInner.classList.remove('show');
     if(ringImg)  ringImg.classList.remove('show');
     if(ringGlow) ringGlow.classList.remove('show');
-    if(wrapper)  wrapper.style.animation = 'woodFloat 4s ease-in-out infinite';
     if(btn)  btn.querySelector('.rb-btn-text').textContent = 'Click It';
     if(msg)  msg.textContent = '';
   } else {
-    // OPEN — stop float, open lid
-    if(wrapper) wrapper.style.animation = 'none';
+    // OPEN — stop float, open wrapper & lid
+    if(wrapper) {
+      wrapper.classList.add('open');
+      wrapper.style.animation = 'none';
+    }
     lid.classList.add('open');
 
     // Show inner lid inscription
@@ -1351,6 +1384,22 @@ function openRingBox(){
     cur.style.left = mx + 'px';
     cur.style.top  = my + 'px';
     spawnTrail(mx, my);
+
+    // Hover scale feedback for clickable elements
+    var target = e.target;
+    if(target && (
+      target.tagName === 'BUTTON' || 
+      target.tagName === 'A' || 
+      target.closest('.rb-scene') || 
+      target.closest('.abtn') || 
+      target.closest('.submit-btn') || 
+      target.closest('.music-btn') || 
+      target.closest('.gallery-item')
+    )) {
+      cur.classList.add('hovering');
+    } else {
+      cur.classList.remove('hovering');
+    }
   });
 
   document.addEventListener('mousedown', function(){ cur.classList.add('clicking'); });
