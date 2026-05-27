@@ -218,8 +218,34 @@
       letter-spacing: 0.4em; text-transform: uppercase;
       color: rgba(255,255,255,0.7);
       animation: fadeUp 1s ease 0.9s both;
-      margin-top: 16px;
+      margin-top: 6px;
     }
+
+    /* Save the Date on first page */
+    .s1-save-date {
+      margin-top: 12px;
+      padding: 12px 16px 6px;
+      width: 100%;
+      text-align: center;
+      animation: fadeUp 1s ease 1s both;
+    }
+    .s1-save-date .eyebrow { margin-bottom: 6px; }
+    .s1-save-date .gold-line { margin: 6px auto; }
+    .s1-save-date .save-date-title { font-size: clamp(1.6rem, 6vw, 2.8rem); margin: 4px 0; }
+    .s1-save-date .save-date-info { font-size: 0.82rem; margin: 4px 0 10px; }
+    .s1-save-date .countdown { margin-top: 8px; }
+
+    /* Down arrow above ARE GETTING ENGAGED */
+    .s1-down-arrow {
+      width: 18px; height: 18px;
+      border-right: 2.5px solid rgba(255,255,255,0.8);
+      border-bottom: 2.5px solid rgba(255,255,255,0.8);
+      transform: rotate(45deg);
+      margin: 12px auto 4px;
+      filter: drop-shadow(0 0 6px rgba(212,175,55,0.8));
+      animation: bounce 1.4s ease-in-out infinite;
+    }
+
     .scroll-hint {
       position: absolute;
       right: 18px;
@@ -1220,12 +1246,32 @@
     <div class="hero-name">L. Vasanth</div>
     <div class="hero-amp">&#9829;</div>
     <div class="hero-name">M. Saraswathi</div>
-    <p class="hero-tagline">Are Getting Engaged</p>
-  </div>
 
-  <div class="scroll-hint">
-    <span>Scroll Down</span>
-    <div class="scroll-arrow"></div>
+    <!-- SAVE THE DATE moved here from section 2 -->
+    <div class="s1-save-date">
+      <p class="eyebrow">Save The Date</p>
+      <div class="gold-line"></div>
+      <div class="save-date-title">June 21, 2026</div>
+      <p class="save-date-info">
+        <span>Sunday</span> &nbsp;&middot;&nbsp; 10:30 AM &mdash; 12:00 PM<br/>
+        Rani Krishna Mahal, Villupuram
+      </p>
+      <!-- Countdown -->
+      <div class="countdown">
+        <div class="cd-item"><div class="cd-num" id="days">00</div><div class="cd-lbl">Days</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-item"><div class="cd-num" id="hours">00</div><div class="cd-lbl">Hours</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-item"><div class="cd-num" id="mins">00</div><div class="cd-lbl">Mins</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-item"><div class="cd-num" id="secs">00</div><div class="cd-lbl">Secs</div></div>
+      </div>
+    </div>
+
+    <!-- Down arrow above tagline -->
+    <div class="s1-down-arrow"></div>
+
+    <p class="hero-tagline">Are Getting Engaged</p>
   </div>
 </section>
 
@@ -1235,39 +1281,7 @@
 <section id="s2">
   <div class="s2-inner">
 
-    <!-- SAVE THE DATE -->
-    <div class="save-date-block">
-      <p class="eyebrow reveal">Save The Date</p>
-      <div class="gold-line reveal d1"></div>
-      <div class="save-date-title reveal d1">June 21, 2026</div>
-      <p class="save-date-info reveal d2">
-        <span>Sunday</span> &nbsp;&middot;&nbsp; 10:30 AM &mdash; 12:00 PM<br/>
-        Rani Krishna Mahal, Villupuram
-      </p>
-
-      <!-- Countdown -->
-      <div class="countdown reveal d3">
-        <div class="cd-item">
-          <div class="cd-num" id="days">00</div>
-          <div class="cd-lbl">Days</div>
-        </div>
-        <div class="cd-sep">:</div>
-        <div class="cd-item">
-          <div class="cd-num" id="hours">00</div>
-          <div class="cd-lbl">Hours</div>
-        </div>
-        <div class="cd-sep">:</div>
-        <div class="cd-item">
-          <div class="cd-num" id="mins">00</div>
-          <div class="cd-lbl">Mins</div>
-        </div>
-        <div class="cd-sep">:</div>
-        <div class="cd-item">
-          <div class="cd-num" id="secs">00</div>
-          <div class="cd-lbl">Secs</div>
-        </div>
-      </div>
-    </div>
+    <!-- Save the Date moved to Section 1 -->
 
 
     <!-- WOODEN 3D RING BOX -->
