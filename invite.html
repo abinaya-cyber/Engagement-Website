@@ -507,17 +507,17 @@
         rgba(100,30,20,0.97)  30%,
         rgba(50,10,15,0.98)   45%,
         rgba(20,5,10,1)       55%,
-        rgba(26,12,0,1)       65%,
-        rgba(40,25,0,1)       75%,
-        rgba(55,35,0,1)       85%,
-        rgba(30,18,0,1)      100%);
+        rgba(15,5,0,1)        70%,
+        rgba(8,3,15,1)        85%,
+        rgba(5,2,12,1)       100%);
     }
     #s3::before {
       content:''; position:absolute; inset:0; pointer-events:none;
       background:
         radial-gradient(ellipse at 50% 20%, rgba(212,175,55,0.15), transparent 55%),
         radial-gradient(ellipse at 30% 70%, rgba(201,99,122,0.1), transparent 45%),
-        radial-gradient(ellipse at 70% 80%, rgba(232,150,74,0.12), transparent 45%);
+        radial-gradient(ellipse at 70% 80%, rgba(232,150,74,0.12), transparent 45%),
+        radial-gradient(ellipse at 50% 95%, rgba(212,175,55,0.1), transparent 60%);
     }
     /* Ornate double border */
     #s3::after {
@@ -531,11 +531,17 @@
     /* Corner ornaments */
     .corner { position:absolute; pointer-events:none; z-index:2; }
 
+    .s3-down-arrow-hint {
+      margin-top: 30px;
+      display: flex; justify-content: center;
+      animation: fadeUp 1s ease 1s both;
+    }
+
     .s3-inner {
       position:relative; z-index:5;
       max-width:660px; width:90%;
       margin:0 auto;
-      padding:70px 24px;
+      padding:70px 24px 30px;
       text-align:center;
     }
     .invite-names {
@@ -652,25 +658,8 @@
     .abtn-wa   { background:linear-gradient(135deg,#25D366,#128C7E); color:white; box-shadow:0 4px 16px rgba(37,211,102,0.3); }
     .abtn-wa:hover { transform:translateY(-2px); }
 
-    /* ================================================
-       SECTION 4 &mdash; FOOTER
-    ================================================ */
-    #s4 {
-      position:relative; overflow:hidden;
-      min-height:50vh; display:flex;
-      align-items:center; justify-content:center;
-      text-align:center; padding:80px 24px;
-      background:linear-gradient(180deg,
-        rgba(30,18,0,1)   0%,
-        rgba(15,5,0,1)    40%,
-        rgba(8,3,15,1)    70%,
-        rgba(5,2,12,1)   100%);
-    }
-    #s4::before {
-      content:''; position:absolute; inset:0;
-      background:radial-gradient(ellipse at 50% 50%, rgba(212,175,55,0.1), transparent 60%);
-    }
-    .footer-inner { position:relative; z-index:2; width:100%; }
+    /* Footer content now merged into s3 */
+    .footer-inner { position:relative; z-index:2; width:100%; margin-top:40px; }
     .footer-names {
       font-family:'Great Vibes',cursive;
       font-size:clamp(2.6rem,8vw,4.5rem);
@@ -1393,34 +1382,28 @@
       </a>
     </div>
 
-    <!-- Couple photo — bottom -->
-    <img src="assets/couple_hero.png" alt="Vasanth and Saraswathi" class="s3-photo reveal d5"/>
-
-    <div class="gold-line-full reveal d5" style="margin-top:26px;"></div>
-  </div>
-
-</section>
-
-<!-- ============================================================
-     SECTION 4 &mdash; FOOTER
-============================================================ -->
-<section id="s4">
-  <div class="footer-inner">
-    <p class="footer-date reveal d1">June 21, 2026 &middot; 10:30 AM &middot; Villupuram</p>
-    <div class="footer-invite-text reveal d2">
-      <div class="fi-families">
-        L. Vasanth's family<br/>
-        <span class="fi-amp">&amp;</span><br/>
-        M. Saraswathi's family
-      </div>
-      <p>
-        cordially invite you and your family to grace the engagement ceremony<br/>
-        and bless the couple as they begin their beautiful journey together.
-      </p>
-      <p class="fi-highlight">Your presence will make this occasion truly memorable.</p>
+    <div class="s3-down-arrow-hint">
+      <div class="s1-down-arrow"></div>
     </div>
 
-    <p class="footer-made reveal d4">Made with &#10084; by <strong>ABI</strong> &middot; For <strong>L. Vasanth &amp; M. Saraswathi</strong></p>
+    <!-- Footer / Family Invite Text (Merged into Section 3) -->
+    <div class="footer-inner" style="margin-top: 40px; padding-bottom: 20px;">
+      <p class="footer-date reveal d1">June 21, 2026 &middot; 10:30 AM &middot; Villupuram</p>
+      <div class="footer-invite-text reveal d2">
+        <div class="fi-families">
+          L. Vasanth's family<br/>
+          <span class="fi-amp">&amp;</span><br/>
+          M. Saraswathi's family
+        </div>
+        <p>
+          cordially invite you and your family to grace the engagement ceremony<br/>
+          and bless the couple as they begin their beautiful journey together.
+        </p>
+        <p class="fi-highlight">Your presence will make this occasion truly memorable.</p>
+      </div>
+
+      <p class="footer-made reveal d4">Made with &#10084; by <strong>ABI</strong> &middot; For <strong>L. Vasanth &amp; M. Saraswathi</strong></p>
+    </div>
   </div>
 </section>
 
