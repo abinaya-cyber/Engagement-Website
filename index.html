@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -285,13 +285,13 @@
       position: relative; z-index: 5;
       max-width: 720px; width: 90%;
       margin: 0 auto;
-      padding: 70px 24px 60px;
+      padding: 50px 24px 40px;
       text-align: center;
     }
 
     /* SAVE THE DATE BLOCK */
     .save-date-block {
-      margin-bottom: 36px;
+      margin-bottom: 20px;
     }
     .save-date-title {
       font-family: 'Great Vibes', cursive;
@@ -678,7 +678,7 @@
       .footer-names { font-size: 1.9rem; }
       .cd-item { min-width: 52px; padding: 10px 8px; }
       .cd-num { font-size: 1.6rem; }
-      .rb-scene { width: 210px; height: 260px; }
+      .rb-scene { width: 210px; height: 240px; }
       .rbc-top, .rb-lid-wrap { width: 178px; }
       .rbc-lip { width: 186px; }
       .rb-base-wrap, .rbc-base { width: 178px; }
@@ -687,13 +687,13 @@
     /* ═══════════════════════════════════
        PREMIUM RING BOX — FULL REDESIGN
     ═══════════════════════════════════ */
-    .ring-box-section{text-align:center;padding:40px 0 60px;position:relative;overflow:visible;}
+    .ring-box-section{text-align:center;padding:16px 0 16px;position:relative;overflow:visible;}
 
     /* Glow ambient behind box */
     .rb-ambient{
       position:absolute;top:50%;left:50%;
       transform:translate(-50%,-50%);
-      width:600px;height:600px;
+      width:380px;height:380px;
       background:radial-gradient(ellipse,rgba(212,175,55,0.18) 0%,rgba(201,99,122,0.1) 45%,transparent 70%);
       pointer-events:none;
       animation:ambPulse 3s ease-in-out infinite;
@@ -706,7 +706,7 @@
     /* Scene container */
     .rb-scene{
       position:relative;
-      width:300px;height:500px;
+      width:300px;height:360px;
       margin:0 auto;
       perspective:1200px;
     }
@@ -715,7 +715,7 @@
     .rb-closed{
       position:absolute;inset:0;
       display:flex;flex-direction:column;
-      align-items:center;justify-content:center;
+      align-items:center;justify-content:flex-start;
       transform-style:preserve-3d;
       animation:boxFloat 3.5s ease-in-out infinite;
       transition:opacity 0.6s ease, transform 1.2s cubic-bezier(0.4,0,0.2,1);
@@ -792,7 +792,7 @@
     .rb-open{
       position:absolute;inset:0;
       display:flex;flex-direction:column;
-      align-items:center;justify-content:center;
+      align-items:center;justify-content:flex-start;
       opacity:0;pointer-events:none;
       transform:translateY(20px) scale(0.95);
       transition:opacity 0.7s ease 0.4s, transform 0.7s ease 0.4s;
